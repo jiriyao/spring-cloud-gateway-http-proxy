@@ -1,0 +1,13 @@
+server:
+  port: 30000
+
+spring:
+  cloud:
+    gateway:
+      routes:
+        - id: open_api
+          uri: https://api.openai.com
+          predicates:
+            - Path=/ai/**
+          filters:
+            - StripPrefix=1 #访问后端服务过滤掉路径中的server2, eg: http://127.0.0.1:30000/server2/index => http://127.0.0.1:31001/index
